@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+66666
+</body>
+</html>
+<script>
+    $(function (){
+            var login = $.cookie('login_in');
+            if(login == "false" || login == undefined){
+                window.location.href = "/index";
+                alert("Please login first!!!")
+            }
+        })
+
+    $(function (){
+        var admin_ps = $.cookie('admin');
+
+        if(admin_ps == "true"){
+            $('.administrator').css('display', 'block');
+            $('.delete_admin').css('display','block');
+        }
+    })
+</script>

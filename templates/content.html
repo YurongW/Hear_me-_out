@@ -1,0 +1,161 @@
+{% extends 'index.html' %}
+{% block loginbox %}
+{% endblock %}
+{% block cssjs %}
+    <link rel="stylesheet" href="/static/front/css/content.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+{% endblock %}
+{% block button %}
+    <button class="logout" onclick="window.location.href = '/index',alert('Please login!!!') ">
+        log in /sign up
+    </button>
+    <button class="login" style="display: none">
+        logout
+    </button>
+    <button class="account"  style="display: none" onclick="window.open('{% url 'personal' %}')">
+        account
+    </button>
+{% endblock %}
+{% block post %}
+    <div class="made">
+        <div class="topic">
+            {{ topic }}
+        </div>
+        <div class="made_container">
+            <div class="img_container">
+                {% if images.0 %}
+                    {% for i in images %}
+                        <img src="{{ i }}" alt="">
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="text_container">
+                {{ content }}
+            </div>
+        </div>
+        <hr>
+        <div class="write_comment">
+            <textarea name="" class="write_text"></textarea>
+            <button class="write_post" onclick="write_comment('{{ topicuuid }}')"> post</button>
+        </div>
+        {% for c in comment %}
+            <div class="comment">
+                <div class="comment_top">
+                    <div class="avatar">
+                        <img src="{{ c.avatar }}" alt="" style="width: 100%">
+                    </div>
+                    <div class="customer">{{ c.customer }}</div>
+                </div>
+                <hr>
+                {{ c.content }}
+            </div>
+            <img src="/static/img/like.jpg" alt="" style="width: 5%" onclick="like('{{ c.uuid }}')">
+            <span  id="{{ c.uuid }}">{{ c.num_like }}</span>
+
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+      $(function () {
+            var login = $.cookie('login_in');
+            if (login == "false" || login == undefined) {
+                {#window.location.href = "/index";#}
+                {#alert("Please login first!!!")#}
+                $('.logout').css('display', 'block');
+                $('.account').css('display', 'none');
+                $('.login').css('display', 'none');
+            }
+            else{
+                 $('.logout').css('display', 'none');
+                $('.account').css('display', 'block');
+                $('.login').css('display', 'block');
+            }
+         } )
+
+
+    // 登出按钮的设计
+    $(document).ready(function () {
+        // 登出按钮的功能
+        $(".login").click(function () {
+
+            var token = sessionStorage.getItem('token');
+            var val = $.cookie('sessionid')
+            $.ajax({
+                headers: {
+                    "Authorization": token,
+                },
+                url: url + 'customer/logout/',
+                type: 'get',
+                success: function () {
+                    // console.log(res);
+                    alert("exit Successful!!!")
+                    localStorage.removeItem('token')
+                    sessionStorage.removeItem('token')
+                    $.cookie('sessionid', '', {expires: -1});
+                    $.cookie('admin', '', {expires: -1,path: "/"});
+                    $.cookie('login_in', '', {expires: -1,path: "/"});
+                    {#$.remove.cookie('login_in',true,{path:'/'});#}
+                    {#$.cookie('login_in', '', {expires: -1});#}
+                    $('#email').val('')
+                    $('#password').val(''),
+                        $('.logout').css('display', 'none');
+                    $('.account').css('display', 'none');
+                    $('.login').css('display', 'block');
+                    $('.container').css('z-index', '0');
+                    window.location.href = '/index'
+                }
+            });
+        });
+    })
+
+        var url = "http://127.0.0.1:8000/"
+
+        function like(uuid) {
+            $.ajax({
+                url: url + 'post/like?uuid=' + uuid,
+                type: "get",
+                data: {},
+                success: function (res) {
+                    if (res.status == "success") {
+                        var y = '#' + uuid
+                        var x = parseInt($(y).html());
+                        ++x;
+                        $(y).html(x)
+                    }
+
+                }
+            })
+        }
+
+
+        function write_comment(uuid) {
+            $.ajax({
+                url: url + 'post/comment/',
+                type: "post",
+                withDirectives: "true",
+                dataType: 'json',
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify({
+                    "topic_uuid": uuid,
+                    "content": $(".write_text").val(),
+                }),
+                success: function (res) {
+                    alert('comment successful!!!')
+                    location.reload(true);
+                }
+            })
+        }
+
+        $(function (){
+        var admin_ps = $.cookie('admin');
+
+        if(admin_ps == "true"){
+            $('.administrator').css('display', 'block');
+            $('.delete_admin').css('display','block');
+        }
+    })
+    </script>
+{% endblock %}

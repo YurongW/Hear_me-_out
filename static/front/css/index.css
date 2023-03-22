@@ -1,0 +1,292 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #c1c1c1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  position: absolute;
+  width: 90%;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+.container .container_header {
+  width: 95%;
+  height: 15%;
+  margin: 0 auto;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fafafa;
+  box-shadow: 2px 4px 6px #dedede;
+}
+.container .container_header .container_header_left {
+  width: 16%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  /*background-color: white;*/
+}
+.logo img{
+  width: 100%;
+}
+.container .container_header .contianer_header_middle {
+  width: 54%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .container_header .contianer_header_middle .search {
+  width: 80%;
+  height: 40px;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 40px;
+}
+.container .container_header .container_header_right {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.container .container_header .container_header_right button {
+  /*display: none;*/
+  cursor: pointer;
+  width: 120px;
+  height: 40px;
+  border-radius: 50px;
+  background-color: white;
+}
+.login{
+  display: block;
+}
+.logout{
+  display: none;
+}
+.account{
+  display: none;
+}
+
+.container .container_middle {
+  width: 95%;
+  height: 10%;
+  margin: 0 auto;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  box-shadow: 2px 4px 6px #dedede;
+}
+.container .container_bottom {
+  width: 95%;
+  height: 70%;
+  margin: 0 auto ;
+  background-color: #fafafa;
+  box-shadow: 2px 4px 6px #dedede;
+  display: flex;
+  justify-content: space-between;
+}
+.container .container_bottom .container_bottom_left {
+  width: 17%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2vw;
+}
+.container .container_bottom .container_bottom_left a {
+  cursor: pointer;
+  width: 100%;
+  border: 1px solid #919191;
+  text-align: center;
+  line-height: 42px ;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .container_bottom .container_bottom_middle {
+  width: 57%;
+  border: 1px solid ;
+  padding: 5px;
+  padding-left: 20px;
+  overflow-y: scroll;
+}
+.container .container_bottom .container_bottom_middle .topic_1 {
+  width: 95%;
+  height: 150px;
+  margin-top: 15px;
+  border: 1px solid;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+}
+.container .container_bottom .container_bottom_middle .topic_1 .Topic {
+  margin-left: 1.5%;
+  width: 100%;
+  height: 15%;
+}
+.container .container_bottom .container_bottom_middle .topic_1 .content {
+  width: 97%;
+  height: 70%;
+  background-color: white;
+  border: 1px solid ;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.container .container_bottom .container_bottom_middle .topic_1 .content .useremail {
+  width: 100%;
+  height: 10%;
+  font-size: 10px;
+  margin-top: 5px;
+  margin-left: 1.5%;
+}
+.container .container_bottom .container_bottom_middle .topic_1 .content .users_comment {
+  width: 100%;
+  height: 90%;
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.container .container_bottom .container_bottom_middle .topic_1 .content .users_comment img {
+  width: 5vh;
+}
+.container .container_bottom .container_bottom_middle .topic_1 .like {
+  width: 100%;
+  height: 15%;
+}
+.container .container_bottom .container_bottom_middle .topic_1 .like img {
+  width: 1vw;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.container .container_bottom .container_bottom_middle .topic_1 .like span {
+  font-size: 1.1vw;
+}
+.container .container_bottom .container_bottom_right {
+  width: 20%;
+  border: 1px solid ;
+  background-color: #fafafa;
+  display: flex ;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.container .container_bottom .container_bottom_right .title {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .container_bottom .container_bottom_right ul {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+.administrator{
+  display: none;
+}
+.container .container_bottom .container_bottom_right ul a {
+  cursor: pointer;
+  list-style: none;
+  display: block;
+  width: 70%;
+  text-align: center;
+  box-shadow: 2px 4px 6px #dedede;
+  border: 1px solid ;
+  height: 23px;
+  background-color: #ffffff;
+}
+.delete_admin{
+  display: none;
+  width: 1vw;
+  height: 1vw;
+  border: 1px solid;
+  margin-top: 0.5vh;
+  margin-right: 1vh;
+  float: right;
+
+}
+.delete_admin img{
+  margin-left: 0 !important;
+  width: 100%;
+  height: 100%;
+}
+.login_box {
+  position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.exit{
+  /*border: 1px solid black;*/
+  float: right;
+  margin-left: 20vw;
+  cursor: pointer;
+}
+.login_box .login_container {
+  width: 400px;
+  height: 300px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  background-color: white;
+}
+.login_box .login_container input {
+  margin-top: 20px;
+  width: 300px;
+  height: 30px;
+}
+.login_box .login_container button {
+  display: block;
+  width: 150px;
+  height: 30px;
+  margin-top: 20px;
+}
+.login_box .register {
+  /*margin-top: 30vh;*/
+  width: 400px;
+  height: 300px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  background-color: white;
+}
+.login_box .register input {
+  margin-top: 20px;
+  width: 300px;
+  height: 30px;
+}
+.login_box .register button {
+  display: block;
+  width: 100px;
+  height: 30px;
+  margin-top: 20px;
+}

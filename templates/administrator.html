@@ -1,0 +1,144 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/front/css/administrator.css">
+    <!-- 在线引入jquery -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+    <!-- 在线引入axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+</head>
+<body>
+<!-- 对于整体的大盒子的设计 -->
+<div class="container">
+    <!-- 对于首页的顶部 -->
+    <div class="container_header">
+        <!-- 首页顶部左侧 -->
+        <div class="container_header_left">
+
+            <div class="logo">
+                <img src="/static/img/logo.png">
+            </div>
+        </div>
+        <!-- 首页顶部中间 -->
+        <div class="contianer_header_middle">
+            Administrator
+        </div>
+        <!-- 对于右侧的两个按钮的设计 -->
+        <div class="container_header_right">
+            <button class="login" onclick='window.open("{% url 'index' %}")'>
+                home
+            </button>
+        </div>
+    </div>
+    <div class="container_bottom">
+        <!-- 对于上方的编辑框的作用 -->
+        <div class="make">
+            <h4>Category name</h4>
+            <span><input type="text" class="wade"></span>
+            <button class="create" onclick="create_category($('.wade').val())">create</button>
+        </div>
+        <!-- 对于下方已经做好的类别框 -->
+        {% for c in category %}
+            <div class="made">
+                <div class="Movie">
+                    {{ c }}
+                </div>
+                <button class="edit">
+                    edit
+                </button>
+                <button class="delete" onclick="delete_category('{{ c }}')">
+                    delete
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+    // var token = sessionStorage.getItem('token')
+    // 在页面窗口加载完毕之后，直接调用
+    var url = "http://127.0.0.1:8000/"
+     $(function (){
+            console.log("2222")
+            var login = $.cookie('login_in');
+            console.log(typeof (login));
+            if(login == "false" || login == undefined){
+                window.location.href = "/index";
+                alert("Please login first!!!")
+            }
+        })
+    function edit_category(old, new_) {
+        $.ajax({
+            url: url + "post/edit_category/",
+            type: 'post',
+            dataType: "json",
+            contentType: 'application/json;charset=UTF-8',
+            data: JSON.stringify({
+                "old": old,
+                "new": new_
+            }),
+            success: function (res) {
+                if (res.status == "success") {
+                    location.reload(true);
+                } else {
+                    alert(res.detail)
+                }
+            }
+        });
+    };
+
+
+
+    function delete_category(category_name) {
+        $.ajax({
+            url: url + "post/delete_category/",
+            type: 'post',
+            dataType: "json",
+            contentType: 'application/json;charset=UTF-8',
+            data: JSON.stringify({
+                "category_name": category_name
+            }),
+            success: function (res) {
+                console.log(res)
+                location.reload(true);
+            }
+        });
+    };
+
+    function create_category(category_name) {
+        $.ajax({
+            url: url + "post/create_category/",
+            type: 'post',
+            dataType: "json",
+            contentType: 'application/json;charset=UTF-8',
+            data: JSON.stringify({
+                "category_name": category_name
+            }),
+            success: function (res) {
+                if (res.status == "success") {
+                    location.reload(true);
+                } else {
+                    alert(res.detail)
+                }
+
+
+            }
+        });
+    };
+$(function (){
+        var admin_ps = $.cookie('admin');
+
+        if(admin_ps == "true"){
+            $('.administrator').css('display', 'block');
+            $('.delete_admin').css('display','block');
+        }
+    })
+
+</script>

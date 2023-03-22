@@ -1,0 +1,318 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #c1c1c1;
+}
+.logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  /*background-color: white;*/
+}
+.logo img{
+  width: 100%;
+}
+.container {
+  margin: 0 auto;
+  width: 90%;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.container .container_header {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fafafa;
+  box-shadow: 2px 4px 6px #dedede;
+}
+.container .container_header .container_header_left {
+  width: 16%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.container .container_header .container_header_left button {
+  margin-left: 10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+}
+.container .container_header .contianer_header_middle {
+  width: 54%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .container_header .contianer_header_middle .search {
+  width: 80%;
+  height: 40px;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 40px;
+}
+.container .container_header .container_header_right {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.container .container_header .container_header_right .login {
+  cursor: pointer;
+  width: 80px;
+  height: 40px;
+  border-radius: 50px;
+  background-color: white;
+}
+.container .container_header .container_header_right .account {
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  border-radius: 50px;
+  background-color: white;
+}
+.container .container_middle {
+  width: 75%;
+  height: 20%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.container .container_middle h3 {
+  height: 10%;
+}
+.delete_account{
+  border: 1px solid;
+  float: right;
+  width: 15px;
+  height: 15px;
+  margin-left: 20px;
+  margin-top: 5vh;
+}
+.delete_account img{
+  width: 100%;
+  cursor: pointer;
+}
+.container .container_middle .Info {
+  background-color: #fafafa;
+  height: 70%;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .container_middle .Info .pic_wai {
+  width: 15%;
+}
+.container .container_middle .Info .pic_wai .pic {
+  width: 60px;
+  height: 60px;
+  background-color: #d7d7d7;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 4px 6px #dedede;
+  font-size: small;
+}
+.pic img{
+  width: 100%;
+}
+.container .container_middle .Info .basic_info {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.container .container_middle .Info .basic_info .basic_top {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+}
+.container .container_middle .Info .basic_info .basic_top .basic_top_left {
+  width: 10%;
+}
+.container .container_middle .Info .basic_info .basic_top .basic_top_left img {
+  width: 40%;
+}
+.container .container_middle .Info .basic_info .basic_top .basic_top_right {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*color: gray;*/
+}
+.container .container_middle .Info .basic_info .basic_bottom {
+  margin-top: 2vh;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: space-between;
+}
+.container .container_middle .Info .basic_info .basic_bottom .basic_bottom_left {
+  background-color: white;
+  width: 45%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.container .container_middle .Info .basic_info .basic_bottom .basic_bottom_left .post_left {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .container_middle .Info .basic_info .basic_bottom .basic_bottom_left .post_left img {
+  width: 100%;
+}
+.container .container_middle .Info .basic_info .basic_bottom .basic_bottom_left .post_right {
+  width: 90%;
+  font-size: small;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+}
+.container .container_middle .Info .basic_info .basic_bottom .basic_bottom_right {
+  width: 45%;
+  display: flex;
+  height: 30%;
+  justify-content: space-between;
+  background-color: white;
+}
+.container .container_middle .Info .basic_info .basic_bottom .basic_bottom_right .like_left {
+  width: 10%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .container_middle .Info .basic_info .basic_bottom .basic_bottom_right .like_left img {
+  width: 100%;
+}
+.container .container_middle .Info .basic_info .basic_bottom .basic_bottom_right .like_right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  font-size: samll;
+  width: 90%;
+}
+.container .container_bottom {
+  width: 75%;
+  height: 55%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.container .container_bottom .container_bottom_middle {
+  width: 100%;
+}
+.container .container_bottom .container_bottom_middle h4 {
+  margin-bottom: 10px;
+}
+.container .container_bottom .container_bottom_middle .main_container {
+  overflow-y: scroll;
+  border: 1px solid ;
+  width: 100%;
+  height: 45vh;
+  padding-left: 20px;
+}
+.container .container_bottom .container_bottom_middle .main_container .topic_1 {
+  width: 95%;
+  height: 170px;
+  margin-top: 1vh;
+  border: 1px solid;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+}
+.container .container_bottom .container_bottom_middle .main_container .topic_1 .Topic {
+  margin-left: 1.5%;
+  width: 100%;
+  height: 15%;
+}
+.useremail{
+  color:blue;
+}
+
+.users_comment{
+  overflow-y: scroll;
+  width: 100% !important;
+}
+.container .container_bottom .container_bottom_middle .main_container .topic_1 .content {
+  width: 97%;
+  height: 70%;
+  background-color: white;
+  border: 1px solid ;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.container .container_bottom .container_bottom_middle .main_container .topic_1 .content .useremail {
+  width: 100%;
+  height: 10%;
+  font-size: 10px;
+  margin-top: 5px;
+  margin-left: 1.5%;
+}
+.container .container_bottom .container_bottom_middle .main_container .topic_1 .content .users_comment {
+  width: 100%;
+  height: 90%;
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.container .container_bottom .container_bottom_middle .main_container .topic_1 .content .users_comment img {
+  width: 5vh;
+}
+.container .container_bottom .container_bottom_middle .main_container .topic_1 .like {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.container .container_bottom .container_bottom_middle .main_container .topic_1 .like .like_icon {
+  width: 30%;
+  display: flex;
+}
+.container .container_bottom .container_bottom_middle .main_container .topic_1 .like .like_icon img {
+  width: 2vw;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.container .container_bottom .container_bottom_middle .main_container .topic_1 .like .like_icon span {
+  margin-left: 8px;
+  font-size: 1.3vw;
+}
+.container .container_bottom .container_bottom_middle .main_container .topic_1 .like .operate {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+}
+.container .container_bottom .container_bottom_middle .main_container .topic_1 .like .operate button {
+  width: 30%;
+  font-size: small;
+  height: 70%;
+  background-color: #555555;
+  border: none;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+}

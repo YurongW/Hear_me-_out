@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #c1c1c1;
+}
+.logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  /*background-color: white;*/
+}
+.logo img{
+  width: 100%;
+}
+.container {
+  margin: 0 auto;
+  width: 90%;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+}
+.container .container_header {
+  width: 100%;
+  height: 15%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fafafa;
+  box-shadow: 2px 4px 6px #dedede;
+}
+.container .container_header .container_header_left {
+  width: 16%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+.container .container_header .container_header_left button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+}
+.container .container_header .contianer_header_middle {
+  width: 54%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2vw;
+}
+.container .container_header .container_header_right {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .container_header .container_header_right button {
+  width: 120px;
+  height: 40px;
+  border-radius: 50px;
+  background-color: white;
+  cursor: pointer;
+}
+.container .container_bottom {
+  width: 75%;
+  height: 80%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fafafa;
+  overflow-y: scroll;
+}
+.container .container_bottom .make {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin-top: 5vh;
+}
+.container .container_bottom .make h4 {
+  width: 30%;
+}
+.container .container_bottom .make span {
+  width: 30%;
+  display: flex;
+  align-items: center;
+}
+.container .container_bottom .make span input {
+  width: 100%;
+}
+.container .container_bottom .make span input[type=text]:focus {
+  outline: none;
+}
+.container .container_bottom .make button {
+  cursor: pointer;
+  width: 20%;
+  box-shadow: 2px 4px 6px #dedede;
+  border: none;
+}
+.container .container_bottom .made {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin-top: 5vh;
+}
+.container .container_bottom .made .movie {
+  border: 1px solid black;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .container_bottom .made .edit {
+  width: 15%;
+  box-shadow: 2px 4px 6px #dedede;
+  border: none;
+  cursor: pointer;
+}
+.container .container_bottom .made .delete {
+  width: 20%;
+  box-shadow: 2px 4px 6px #dedede;
+  border: none;
+  cursor: pointer;
+}

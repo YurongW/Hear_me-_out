@@ -1,0 +1,283 @@
+{% extends 'index.html' %}
+{% block loginbox %}
+{% endblock %}
+{% block cssjs %}
+    <link rel="stylesheet" href="/static/front/css/category.css">
+    <!-- 在线引入jquery -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+    <!-- 在线引入axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+{% endblock %}
+{% block button %}
+    <button class="logout" onclick="window.location.href ='/index', alert('Please Login !!!') ">
+         log in /sign up
+    </button>
+    <button class="login">
+        logout
+    </button>
+    <button class="account" onclick="window.open('{% url 'personal' %}')" >
+        account
+    </button>
+{% endblock %}
+{% block post %}
+    <div class="title">
+        <h4>{{ name }} Popular Posts</h4>
+    </div>
+    <div class="make">
+        <div class="make_topic">
+            <input type="text" placeholder=" your topic" id="topic" style="padding-left:5px">
+        </div>
+        <div class="make_comment">
+            <div class="content">
+                <textarea name="" id="user_email" cols="30" rows="10"></textarea>
+
+            </div>
+        </div>
+        <div class="make_post">
+            <form method="post" enctype="multipart/form-data">
+                <input id="upload"
+                       multiple="multiple"
+                       type="file" name="pic" accept="image/*" multiple="multiple">
+
+            </form>
+            <button class="post">post</button>
+        </div>
+    </div>
+    {% for p in  posts %}
+        <div class="topic_1">
+            <div class="Topic" onclick="window.open('{% url 'content' uuid=p.topicuuid %}')">
+                <h6>{{ p.topicname }}</h6>
+            </div>
+            <div class="content" onclick="window.open('{% url 'content' uuid=p.topicuuid %}')">
+                <div class="useremail">
+                    <h6>{{ p.customer }}</h6>
+                </div>
+                <div class="users_comment">
+                    <h4>{{ p.content }}</h4>
+                    {% if p.images.0 %}
+                        <img src={{ p.images.0 }}>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="like">
+                <img src="/static/img/like.jpg" alt="" onclick="like('{{ p.topicuuid }}')">
+                <span id="{{ p.topicuuid }}">{{ p.like }}</span>
+
+                <div class="delete_admin">
+                    <img src="/static/img/trash.png" onclick="delete_comment_post('{{ p.topicuuid }}')">
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+{% block js %}
+    <script>
+        $(function () {
+            var login = $.cookie('login_in');
+            if (login == "false" || login == undefined) {
+                {#window.location.href = "/index";#}
+                {#alert("Please login first!!!")#}
+                $('.logout').css('display', 'block');
+                $('.account').css('display', 'none');
+                $('.login').css('display', 'none');
+            }
+            else{
+                 $('.logout').css('display', 'none');
+                $('.account').css('display', 'block');
+                $('.login').css('display', 'block');
+            }
+         } )
+
+
+        // 登出按钮的设计
+        $(document).ready(function () {
+            // 登出按钮的功能
+            $(".login").click(function () {
+
+                var token = sessionStorage.getItem('token');
+                var val = $.cookie('sessionid')
+                $.ajax({
+                    headers: {
+                        "Authorization": token,
+                    },
+                    url: url + 'customer/logout/',
+                    type: 'get',
+                    success: function () {
+                        // console.log(res);
+                        alert("exit Successful!!!")
+                        localStorage.removeItem('token')
+                        sessionStorage.removeItem('token')
+                        $.cookie('sessionid', '', {expires: -1});
+                        $.cookie('admin', '', {expires: -1,path: "/"});
+                        $.cookie('login_in', '', {expires: -1, path: "/"});
+                        {#$.remove.cookie('login_in',true,{path:'/'});#}
+                        {#$.cookie('login_in', '', {expires: -1});#}
+                        $('#email').val('')
+                        $('#password').val(''),
+                            $('.logout').css('display', 'none');
+                        $('.account').css('display', 'none');
+                        $('.login').css('display', 'block');
+                        $('.container').css('z-index', '0');
+                        window.location.href = '/index';
+                    }
+                });
+            });
+        })
+
+        var url = "http://127.0.0.1:8000/"
+
+        var arr = [];
+        var img_info;
+
+        // 整体的文件上传的效果
+        function like(uuid) {
+            $.ajax({
+                url: url + 'post/like?uuid=' + uuid,
+                type: "get",
+                data: {},
+                success: function (res) {
+                    if (res.status == "success") {
+                        var y = '#' + uuid
+                        var x = parseInt($(y).html());
+                        ++x;
+                        $(y).html(x)
+                    }
+
+                }
+            })
+        }
+
+        $(document).ready(function () {
+
+            // post的功能
+            $(".post").click(function () {
+                var age = $.cookie('login_in');
+            if (age == "false" || age == undefined) {
+                alert("Please Login!!!")
+            }
+            else {
+                $.ajax({
+                    withDirectives: "true",
+                    url: url + 'post/pull_topic/',
+                    dataType: 'json',
+                    contentType: 'application/json;charset=UTF-8',
+                    type: 'post',
+                    data: JSON.stringify({
+                        "topic": $("#topic").val(),
+                        "content": $("#user_email").val(),
+                        "category": '{{ name }}',
+                        "images": arr
+                    }),
+                    success: function (res) {
+                        alert("post successed!!!!!");
+                        location.reload(true);
+                    }
+                });
+            }
+            });
+        })
+
+
+        // 对于图片的问题上传的封装
+        function upload() {
+
+            //new FormData的参数是一个DOM对象，而非jQuery对象
+
+            var formData = new FormData();
+
+//获取该input的所有元素、属性
+
+            var f = document.getElementById("upload");
+
+            //  var userID=document.getElementById("userID").value;
+
+            for (var i = 0; i < f.files.length; i++) {
+
+                var strname = "file" + i;
+
+
+//将参数以键值对的形式添加到formDate构造函数
+
+                // formData.append("userID", userID);
+
+                formData.append("pic", f.files[i]);
+
+            }
+
+            console.log(f.files);
+
+            $.ajax({
+
+                url: url + "uploadimg/",
+
+                type: 'post',
+
+                data: formData,  // 上传formdata封装的数据
+
+                async: true,
+
+                // 下面三个参数要指定，如果不指定，会报一个JQuery的错误
+
+                cache: false,         // 不缓存
+
+                // 不设置内容类型  jQuery不要去设置Content-Type请求头
+
+                contentType: false,
+
+                processData: false,  // jQuery不要去处理发送的数据
+
+                success: function (data) {            //成功回调
+                    img_info = data.msg;
+                    console.log(img_info)
+                    arr.push(img_info);
+                    console.log(arr)
+
+                },
+
+                error: function (data) {
+
+                    alert(data);
+
+                }
+
+            });
+
+        }
+
+        // 当输入框的图片不为空值的时候，调用上方的函数
+        $(function () {
+            var $input = $("#upload");
+            // ①为input设定change事件
+            $input.change(function () {
+                //    ②如果value不为空，调用文件加载方法
+                if ($(this).val() != "") {
+                    upload();
+                }
+            })
+        })
+
+        $(function () {
+            var admin_ps = $.cookie('admin');
+
+            if (admin_ps == "true") {
+                $('.administrator').css('display', 'block');
+                $('.delete_admin').css('display', 'block');
+            }
+        })
+
+        function delete_comment_post(uuid) {
+            $.ajax({
+                url: url + 'post/delete_post_comment/?uuid=' + uuid,
+                type: "get",
+                withDirectives: "true",
+                dataType: 'json',
+                contentType: 'application/json;charset=UTF-8',
+                success: function (res) {
+                    alert('Deleted!!!')
+                    location.reload(true);
+                }
+            })
+        }
+    </script>
+{% endblock %}

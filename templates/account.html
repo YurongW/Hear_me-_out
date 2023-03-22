@@ -1,0 +1,223 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents</title>
+    <link rel="stylesheet" href="/static/front/css/account.css">
+    <script src="/static/front/js/login.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+</head>
+<body>
+<!-- 对于整体的大盒子的设计 -->
+<div class="container">
+    <!-- 对于首页的顶部 -->
+    <div class="container_header">
+        <!-- 首页顶部左侧 -->
+        <div class="container_header_left">
+
+            <div class="logo">
+                <img src="/static/img/logo.png">
+            </div>
+        </div>
+        <!-- 首页顶部中间 -->
+        <div class="contianer_header_middle">
+            <!-- 对于搜索框的设计 -->
+            <input type="search" name="search" placeholder="search" class="search">
+        </div>
+        <!-- 对于右侧的两个按钮的设计 -->
+        <div class="container_header_right">
+            <button class="login">
+                log out
+            </button>
+            <button class="account" onclick='window.open("{% url 'index' %}")'>
+                home
+            </button>
+        </div>
+    </div>
+    <div class="container_middle">
+        <h3>My Info</h3>
+        <div class="Info">
+            <div class="pic_wai">
+                <div class="pic">
+                    <img src={{ info.avatar }}>
+                </div>
+            </div>
+
+            <div class="basic_info">
+                <div class="basic_top">
+                    <div class="basic_top_left">
+                        <img src="/static/img/email.jpg" alt="">
+                    </div>
+                    <!-- 引入后端给的邮件的信息 -->
+                    <div class="basic_top_right">
+                        {{ info.email }}
+                    </div>
+                </div>
+                <div class="basic_bottom">
+                    <div class="basic_bottom_left">
+                        <div class="post_left">
+                            <img src="/static/img/pencil_no.png" alt="">
+                        </div>
+                        <!-- 从后端引入已经发布的贴子的数目 -->
+                        <div class="post_right">
+                            {{ info.num_post }}
+                        </div>
+                    </div>
+                    <div class="basic_bottom_right">
+                        <div class="like_left">
+                            <img src="/static/img/like.jpg" alt="">
+                        </div>
+                        <!-- 从后端引入点赞的数目 -->
+                        <div class="like_right">
+                            {{ info.num_like }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="delete_account">
+                <img src="/static/img/trash.png" onclick="delete_account('{{ info.email }}')">
+            </div>
+        </div>
+
+    </div>
+    <div class="container_bottom">
+        <div class="container_bottom_middle show_hide">
+            <!-- 对于顶部的标题的设计 -->
+            <div class="title">
+                <h4>My Posts</h4>
+            </div>
+
+            <div class="main_container">
+                <!-- 对于一个命令的设计 -->
+                {% for r in res %}
+                    <div class="topic_1">
+                        <div class="Topic" onclick="window.open('{% url 'content' uuid=r.topic_uuid %}')">
+                            <h6>{{ r.topic_name }}</h6>
+                        </div>
+                        <div class="content" onclick="window.open('{% url 'content' uuid=r.topic_uuid %}')">
+                            <div class="useremail">
+                                <h6>{{ info.email }}</h6>
+                            </div>
+                            <div class="users_comment">
+                                <h4>{{ r.content }}</h4>
+                                {% if r.images.0 %}
+                                    <img src={{ r.images.0 }}>
+                                {% endif %}
+                                {#                                <img src="/static/img/defeat.jpg" alt="">#}
+                            </div>
+                        </div>
+                        <div class="like">
+                            <div class="like_icon">
+                                <img src="/static/img/like.jpg" onclick="add()" alt="">
+                                <!-- <span id="addtext">
+{#                                    {{ r.num }}#}
+                                </span> -->
+                                <span id="addtext">
+                                    {{ r.numlike }}
+                                </span>
+                            </div>
+                            <div class="operate">
+                                <button>
+                                    edit
+                                </button>
+                                <button onclick="delete_comment_post('{{ r.comment_uuid }}')">
+                                    delete
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+{% block js %}
+    <script>
+        var url = "http://127.0.0.1:8000/"
+        $(function (){
+            var login = $.cookie('login_in');
+            if(login == "false" || login == undefined){
+                window.location.href = "/index";
+                alert("Please login first!!!")
+            }
+        })
+        function delete_comment_post(uuid) {
+            $.ajax({
+                url: url + 'post/delete_post_comment/?uuid=' + uuid,
+                type: "get",
+                withDirectives: "true",
+                dataType: 'json',
+                contentType: 'application/json;charset=UTF-8',
+                success: function (res) {
+                    alert('Deleted!!!')
+                    location.reload(true);
+                }
+            })
+        }
+
+         function delete_account(username) {
+            $.ajax({
+                url: url + 'customer/delete/?username=' + username,
+                type: "get",
+                withDirectives: "true",
+                dataType: 'json',
+                contentType: 'application/json;charset=UTF-8',
+                success: function (res) {
+                    alert('Deleted!!!')
+                    {#location.reload(true);#}
+                    window.location.href = "/index";
+                     $.cookie('sessionid', '', {expires: -1});
+                    $.cookie('admin', '', {expires: -1,path: "/"});
+                    $.cookie('login_in', '', {expires: -1,path: "/"});
+                }
+            })
+        }
+
+        $(function (){
+        var admin_ps = $.cookie('admin');
+
+        if(admin_ps == "true"){
+            $('.administrator').css('display', 'block');
+            $('.delete_admin').css('display','block');
+        }
+    })
+
+        $(document).ready(function () {
+        // 登出按钮的功能
+        $(".login").click(function () {
+
+            var token = sessionStorage.getItem('token');
+            var val = $.cookie('sessionid')
+            $.ajax({
+                headers: {
+                    "Authorization": token,
+                },
+                url: url + 'customer/logout/',
+                type: 'get',
+                success: function () {
+                    // console.log(res);
+                    alert("exit Successful!!!")
+                    localStorage.removeItem('token')
+                    sessionStorage.removeItem('token')
+                    $.cookie('sessionid', '', {expires: -1});
+                    $.cookie('admin', '', {expires: -1,path: "/"});
+                    $.cookie('login_in', '', {expires: -1,path: "/"});
+                    {#$.remove.cookie('login_in',true,{path:'/'});#}
+                    {#$.cookie('login_in', '', {expires: -1});#}
+                    window.location.href = "/index";
+                }
+            });
+        });
+    })
+
+    </script>
+{% endblock %}
