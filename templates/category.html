@@ -22,8 +22,8 @@
 {% endblock %}
 {% block post %}
     <div class="title">
-        <h4>{{ name }} </h4>
-        <h4>Popular Posts</h4>
+        <h1 style="color: white">{{ name }} </h1>
+        <h2 style="color: white">Make your Posts</h2>
     </div>
     <div class="make">
         <div class="make_topic">
@@ -45,7 +45,7 @@
             <button class="post">post</button>
         </div>
     </div>
- <h4>Recommend Posts</h4>
+ <h2 style="color: white">Recommend Posts</h2>
 
     {% for p in  posts %}
 
@@ -105,7 +105,7 @@
                     headers: {
                         "Authorization": token,
                     },
-                    url: url + 'customer/logout/',
+                    url:  '/customer/logout/',
                     type: 'get',
                     success: function () {
                         // console.log(res);
@@ -129,7 +129,7 @@
             });
         })
 
-        var url = "http://127.0.0.1:8000/"
+        {#var url = "http://127.0.0.1:8000/"#}
 
         var arr = [];
         var img_info;
@@ -137,7 +137,7 @@
         // 整体的文件上传的效果
         function like(uuid) {
             $.ajax({
-                url: url + 'post/like?uuid=' + uuid,
+                url:  '/post/like?uuid=' + uuid,
                 type: "get",
                 data: {},
                 success: function (res) {
@@ -163,7 +163,7 @@
             else {
                 $.ajax({
                     withDirectives: "true",
-                    url: url + 'post/pull_topic/',
+                    url:  '/post/pull_topic/',
                     dataType: 'json',
                     contentType: 'application/json;charset=UTF-8',
                     type: 'post',
@@ -213,7 +213,7 @@
 
             $.ajax({
 
-                url: url + "uploadimg/",
+                url:  "/uploadimg/",
 
                 type: 'post',
 
@@ -272,7 +272,7 @@
 
         function delete_comment_post(uuid) {
             $.ajax({
-                url: url + 'post/delete_post_comment/?uuid=' + uuid,
+                url:  '/post/delete_post_comment/?uuid=' + uuid,
                 type: "get",
                 withDirectives: "true",
                 dataType: 'json',

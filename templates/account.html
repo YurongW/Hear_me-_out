@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documents</title>
+    <title>HearMeOut</title>
     <link rel="stylesheet" href="/static/front/css/account.css">
     <script src="/static/front/js/login.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
@@ -142,7 +142,7 @@
 </html>
 {% block js %}
     <script>
-        var url = "http://127.0.0.1:8000/"
+        {#var url = "http://127.0.0.1:8000/"#}
         $(function (){
             var login = $.cookie('login_in');
             if(login == "false" || login == undefined){
@@ -152,7 +152,7 @@
         })
         function delete_comment_post(uuid) {
             $.ajax({
-                url: url + 'post/delete_post_comment/?uuid=' + uuid,
+                url: '/post/delete_post_comment/?uuid=' + uuid,
                 type: "get",
                 withDirectives: "true",
                 dataType: 'json',
@@ -166,7 +166,7 @@
 
          function delete_account(username) {
             $.ajax({
-                url: url + 'customer/delete/?username=' + username,
+                url:'/customer/delete/?username=' + username,
                 type: "get",
                 withDirectives: "true",
                 dataType: 'json',
@@ -201,7 +201,7 @@
                 headers: {
                     "Authorization": token,
                 },
-                url: url + 'customer/logout/',
+                url:  '/customer/logout/',
                 type: 'get',
                 success: function () {
                     // console.log(res);

@@ -84,6 +84,12 @@ body {
 }
 
 .container .container_middle {
+  background-image: url("/static/img/bgc.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  font-weight: bolder;
+  font-size: 20px;
   width: 95%;
   height: 10%;
   margin: 0 auto;
@@ -93,6 +99,7 @@ body {
   align-items: center;
   background-color: #fafafa;
   box-shadow: 2px 4px 6px #dedede;
+
 }
 .container .container_bottom {
   width: 95%;
@@ -112,9 +119,13 @@ body {
   overflow-y: scroll;
 }
 .container .container_bottom .container_bottom_left a {
+  /*border-color: rgb(91,108,124);*/
+  font-size: 2vh;
+  text-decoration: none;
+  color: black;
   cursor: pointer;
   width: 100%;
-  border: 1px solid #919191;
+  border: 2px solid rgb(91,108,124);
   text-align: center;
   line-height: 42px ;
   box-sizing: border-box;
@@ -124,13 +135,18 @@ body {
   align-items: center;
 }
 .container .container_bottom .container_bottom_middle {
+  background-color: rgb(91,108,124);
   width: 57%;
   border: 1px solid ;
   padding: 5px;
   padding-left: 20px;
   overflow-y: scroll;
 }
+.container .container_bottom .container_bottom_middle h4{
+  color: white;
+}
 .container .container_bottom .container_bottom_middle .topic_1 {
+  background-color: white;
   width: 95%;
   height: 150px;
   margin-top: 15px;
@@ -141,11 +157,13 @@ body {
   align-items: center;
 }
 .container .container_bottom .container_bottom_middle .topic_1 .Topic {
+  font-size: 3vh;
   margin-left: 1.5%;
   width: 100%;
   height: 15%;
 }
 .container .container_bottom .container_bottom_middle .topic_1 .content {
+  font-size: 2vh;
   width: 97%;
   height: 70%;
   background-color: white;
@@ -156,8 +174,9 @@ body {
 }
 .container .container_bottom .container_bottom_middle .topic_1 .content .useremail {
   width: 100%;
+  font-size: 2vh;
   height: 10%;
-  font-size: 10px;
+  /*font-size: 10px;*/
   margin-top: 5px;
   margin-left: 1.5%;
 }
@@ -186,14 +205,16 @@ body {
   font-size: 1.1vw;
 }
 .container .container_bottom .container_bottom_right {
+  background-color: rgb(91,108,124);
   width: 20%;
   border: 1px solid ;
-  background-color: #fafafa;
+  /*background-color: #fafafa;*/
   display: flex ;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   flex-direction: column;
 }
 .container .container_bottom .container_bottom_right .title {
+  color: white;
   width: 100%;
   height: 10%;
   display: flex;
@@ -204,7 +225,7 @@ body {
   width: 100%;
   height: 90%;
   display: flex;
-  justify-content: space-around;
+  /*justify-content: space-around;*/
   flex-direction: column;
   align-items: center;
 }
@@ -212,13 +233,17 @@ body {
   display: none;
 }
 .container .container_bottom .container_bottom_right ul a {
+  text-overflow: ellipsis;
+  margin-top: 1vh;
+  text-decoration: none;
+  color: black;
   overflow: hidden;
   cursor: pointer;
   list-style: none;
   display: block;
   width: 70%;
   text-align: center;
-  box-shadow: 2px 4px 6px #dedede;
+  /*box-shadow: 2px 4px 6px #dedede;*/
   border: 1px solid ;
   height: 23px;
   background-color: #ffffff;

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HearMeOut</title>
     <!-- <link rel="stylesheet" href="/static/front/css/index.css"> -->
     {% block cssjs %}
         <link rel="stylesheet" href="/static/front/css/index.css">
@@ -61,7 +61,7 @@
     <div class="container_bottom">
         <!-- 对于下方的左侧的设计 -->
         <div class="container_bottom_left">
-            <a href="{% url 'index' %}">Categories</a>
+            <a href="{% url 'index' %}" style="font-weight: bolder">Categories</a>
             {% for c in  category %}
                 <a href={% url 'popular' category=c %}>{{ c }}</a>
             {% endfor %}
@@ -71,7 +71,7 @@
             <!-- 对于顶部的标题的设计 -->
             {% block post %}
                 <div class="title">
-                    <h4>Popular Posts</h4>
+                    <h4>Make your Posts</h4>
                 </div>
                 <!-- 对于一个命令的设计 -->
 
@@ -82,7 +82,7 @@
                         </div>
                         <div class="content">
                             <div class="useremail" style="color: blue">
-                                <h6>{{ p.customer }}</h6>
+                                <h6 style="color: black">{{ p.customer }}</h6>
                             </div>
                             <div class="users_comment" style="height: 70%; overflow-y: scroll">
                                 <h4>{{ p.content }}</h4>
@@ -155,7 +155,7 @@
 
     function delete_comment_post(uuid) {
         $.ajax({
-            url: url + 'post/delete_post_comment/?uuid=' + uuid,
+            url:  '/post/delete_post_comment/?uuid=' + uuid,
             type: "get",
             withDirectives: "true",
             dataType: 'json',
@@ -168,7 +168,7 @@
     }
     function like(uuid) {
         $.ajax({
-            url: url + 'post/like?uuid=' + uuid,
+            url:  '/post/like?uuid=' + uuid,
             type: "get",
             data: {},
             success: function (res) {
@@ -185,7 +185,7 @@
 
     // 对于注册按钮首先设置他禁用状态
     $(".rebtn").attr("disabled", "true");
-    var url = "http://127.0.0.1:8000/"
+
     // 首先将Logout的展示方式设定为none
     // $('.logout').css('display','none');
     // $('.account').css('display','none');
@@ -236,7 +236,7 @@
     $(document).ready(function () {
         // 登录按钮的点击功能
         $("#login").click(function () {
-            $.post(url + "customer/login/", {
+            $.post( "/customer/login/", {
                     "email": $('#email').val(),
                     "password": $('#password').val(),
                     // "email":"admin",
@@ -309,7 +309,7 @@
                 headers: {
                     "Authorization": token,
                 },
-                url: url + 'customer/logout/',
+                url:  '/customer/logout/',
                 type: 'get',
                 success: function () {
                     // console.log(res);
@@ -414,7 +414,7 @@
 
         // 注册按钮的功能
         $(".rebtn").click(function () {
-            $.post(url + "customer/register/", {
+            $.post("/customer/register/", {
                     "email": $('#ema').val(),
                     "password": $('#pass').val(),
 
