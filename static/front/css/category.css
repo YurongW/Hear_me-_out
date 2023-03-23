@@ -122,7 +122,6 @@ body {
   background-color: #fafafa;
   box-shadow: 2px 4px 6px #dedede;
 }
-
 .container .container_bottom {
   width: 95%;
   height: 70%;
@@ -130,9 +129,7 @@ body {
   background-color: #fafafa;
   box-shadow: 2px 4px 6px #dedede;
   display: flex;
-
   justify-content: space-between;
-
 }
 .container .container_bottom .container_bottom_left {
   width: 17%;
@@ -140,6 +137,7 @@ body {
   display: flex;
   flex-direction: column;
   font-size: 1.2vw;
+  overflow-y: scroll;
 }
 .container .container_bottom .container_bottom_left .cate {
   font-weight: bolder;
@@ -319,6 +317,7 @@ body {
   align-items: center;
 }
 .container .container_bottom .container_bottom_right ul a {
+  overflow: hidden;
   list-style: none;
   cursor: pointer;
   display: block;

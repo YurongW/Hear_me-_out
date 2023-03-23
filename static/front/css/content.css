@@ -112,6 +112,7 @@ body {
   display: flex;
   flex-direction: column;
   font-size: 1.2vw;
+  overflow-y: scroll;
 }
 .container .container_bottom .container_bottom_left a {
   cursor: pointer;
@@ -206,7 +207,6 @@ body {
   margin-left: 10%;
   margin-top: 5px;
   width: 20%;
-  height: 30px;
 }
 .made .comment{
   width: 90%;
@@ -267,6 +267,7 @@ body {
   align-items: center;
 }
 .container .container_bottom .container_bottom_right ul a {
+  overflow: hidden;
   cursor: pointer;
   list-style: none;
   display: block;

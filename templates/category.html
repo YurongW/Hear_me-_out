@@ -22,7 +22,8 @@
 {% endblock %}
 {% block post %}
     <div class="title">
-        <h4>{{ name }} Popular Posts</h4>
+        <h4>{{ name }} </h4>
+        <h4>Popular Posts</h4>
     </div>
     <div class="make">
         <div class="make_topic">
@@ -44,7 +45,10 @@
             <button class="post">post</button>
         </div>
     </div>
+ <h4>Recommend Posts</h4>
+
     {% for p in  posts %}
+
         <div class="topic_1">
             <div class="Topic" onclick="window.open('{% url 'content' uuid=p.topicuuid %}')">
                 <h6>{{ p.topicname }}</h6>
